@@ -1,6 +1,6 @@
 [build-system]
-requires = ["maturin>=1.7,<2.0"]
-build-backend = "maturin"
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "deebot-client"
@@ -24,7 +24,7 @@ classifiers = [
     "Topic :: Home Automation",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-requires-python = ">=3.14.0"
+requires-python = ">=3.10,<3.13"
 dependencies = [
     "aiohttp>=3.13.3,<4.0",
     "aiomqtt>=2.5.0,<3.0",
@@ -32,7 +32,7 @@ dependencies = [
     "defusedxml>=0.7.1",
     "orjson>=3.11.3",
 ]
-version = "0.0.0"
+version = "0.1.0"
 
 [project.urls]
 "Homepage" = "https://deebot.readthedocs.io/"
@@ -51,8 +51,6 @@ cache-keys = [
 dev = [
     { include-group = "test" },
     { include-group = "lint" },
-    "maturin[patchelf]==1.13.1",
-    "maturin-import-hook==0.3.0",
 ]
 lint = [
     "mypy==2.0.0",
@@ -72,19 +70,6 @@ test = [
     "pytest-github-actions-annotate-failures==0.4.0",
     "pytest-xdist==3.8.0",
     "syrupy==5.1.0",
-]
-
-[tool.maturin]
-features = ["pyo3/extension-module"]
-module-name = "deebot_client.rs"
-auditwheel = "repair"
-exclude = [
-    { path = "**/.*/**", format = "sdist" },
-    { path = "**/.*", format = "sdist" },
-    { path = "*.ini", format = "sdist" },
-    { path = "tests/**", format = "sdist" },
-    { path = "scripts/**", format = "sdist" },
-    { path = "ci/**", format = "sdist" },
 ]
 
 [tool.ruff.lint]
